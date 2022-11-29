@@ -6,13 +6,50 @@ public class PlayerController : MonoBehaviour
 {
     public float speed, limitX, xSpeed;
     [SerializeField] DynamicJoystick dynamicJoystick;
+    [SerializeField] Animator animator;
+
+    private void OnEnable()
+    {
+        GameManager.onStart += OnGameStarted;
+        GameManager.onFail += Defeated;
+        GameManager.onSuccess += LevelWon;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.onStart -= OnGameStarted;
+        GameManager.onFail -= Defeated;
+        GameManager.onSuccess -= LevelWon;
+    }
+
     private void Start()
     {
         dynamicJoystick = FindObjectOfType<DynamicJoystick>();
-
     }
+
+    void LevelWon()
+    {
+        animator.SetTrigger("Victory");
+        started = false;
+    }
+
+    void Defeated()
+    {
+        animator.SetTrigger("Defeat");
+        started = false;
+    }
+
+    bool started = false;
+    void OnGameStarted()
+    {
+        started = true;
+    }
+
     void Update()
     {
+        if (!started)
+            return;
+
         float newX = 0;
         float touchXDelta = 0;
         touchXDelta = dynamicJoystick.Horizontal;

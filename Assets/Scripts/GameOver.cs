@@ -10,7 +10,6 @@ public class GameOver : MonoBehaviour
     {
         if (other.gameObject.tag == "Trap")
         {
-            Time.timeScale = 0;
             isDied = true;
             GameManager.InvokeFail();
         }

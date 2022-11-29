@@ -8,8 +8,10 @@ public class FinishLine : MonoBehaviour
     {
         if (other.tag == "Catch")
         {
-            GameManager.InvokeSuccess();
-            Time.timeScale = 0;
+            if (GameManager.Gems > 2)
+                GameManager.InvokeSuccess();
+            else
+                GameManager.InvokeFail();
         }
     }
 }

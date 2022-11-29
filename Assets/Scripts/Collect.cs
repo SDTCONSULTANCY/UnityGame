@@ -28,5 +28,11 @@ public class Collect : MonoBehaviour
             other.gameObject.GetComponent<Collect_Balls>().SetIndex(height);
             other.gameObject.GetComponent<Collect_Balls>().transform.parent = player_cube.transform;
         }
+
+        if (other.gameObject.tag == "Gem" && other.TryGetComponent<Gem>(out var gem)) 
+        {
+            gem.Collect();
+            GameManager.Gems++;
+        }
     }
 }

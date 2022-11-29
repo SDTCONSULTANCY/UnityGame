@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Catch
   - Trap
+  - Gem
   layers:
   - Default
   - TransparentFX
